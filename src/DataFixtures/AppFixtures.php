@@ -19,12 +19,12 @@ class AppFixtures extends Fixture
     }
     public function load(ObjectManager $manager)
     {
-        $admin = new Employe();
-        $admin->setEmail('employe@test.com')
-            ->setRoles(['ROLE_EMPLOYE'])
+        $admin = new Administrateur();
+        $admin->setEmail('admin@test.com')
+            ->setRoles(['ROLE_ADMIN'])
             ->setPrenom('John')
             ->setNom('Smith')
-            ->setPassword($this->passwordHasher->hashPassword($admin, 'employe'));
+            ->setPassword($this->passwordHasher->hashPassword($admin, 'Administrateur02!'));
 //        $date = new \DateTime(date('d-m-y'));
 //        $livres = new Livre();
 //        $livres->setTitre('Le roi Lion')
