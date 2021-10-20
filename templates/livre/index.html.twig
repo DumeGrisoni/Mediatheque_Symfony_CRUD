@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ livre.titre }}{% endblock %}
+
+{% block body %}
+    {% include 'Navbar.html.twig' %}
+
+    <div class="container-md livre mt-5 border rounded ">
+        <div class="row text-center">
+            <div class="col mb-3">
+                <img src="{{ vich_uploader_asset(livre, 'imageFile') }}" alt="Image couverture du livre"
+                                  class="m-auto mt-2 border border-dark rounded" style="height: 200px; width: 150px; box-shadow: 5px 5px 6px 2px rgba(0,0,0,0.5);">
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col mt-2">
+                <h1 class="h1">{{ livre.titre }}</h1>
+            </div>
+        </div>
+        <div class="row text-center mt-5 border border-dark rounded w-75 mx-auto" style="background-color: var(--tercary-color); box-shadow: 5px 5px 6px 2px rgba(0,0,0,0.5);">
+            <div class="col-lg-4 col-sm">
+                <b>Paru le : </b>
+                <i>{{ livre.dateparution|date('d-m-y') }}</i>
+            </div>
+            <div class="col-lg-4">
+                <b>Ecrit par : </b>
+                <i>{{ livre.auteur }}</i>
+            </div>
+            <div class="col-lg-4">
+                <b>Genre : </b>
+                <i>{{ livre.genre }}</i>
+            </div>
+        </div>
+        <div class="text-center mt-5"><h2><b>Synopsis</b></h2></div>
+        <div class="row text-center border border-dark rounded w-50 mx-auto mb-5" style="box-shadow: 5px 5px 6px 2px rgba(0,0,0,0.5);">
+            <div class="col">
+                <p><i>{{ livre.description }}</i></p>
+            </div>
+        </div>
+        <div class="row mx-auto mb-3" style="width: 40%">
+            <button type="button" class="col-lg  button" >
+                <a href="{{ path('catalogue') }}">Retour au catalogue</a>
+            </button>
+            {% if livre.disponible == true %}
+                <button type="button" class="col-lg  button" >
+                    <a href="{{ path('emprunt',{id: livre.id}) }}">Emprunter</a>
+                </button>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

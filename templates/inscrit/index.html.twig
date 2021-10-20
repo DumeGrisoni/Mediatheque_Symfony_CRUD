@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Epace privé de {{ app.user.prenom }}{% endblock %}
+
+{% block body %}
+    {% include 'Navbar.html.twig' %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p>
+                    <button class="button rounded mt-2">
+                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                    </button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="row text-center">
+            <div class="col">
+                <button class="btn" style="background-color: lightcoral">{{ flashMessage }}</button>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="container-md user rounded border border-dark mt-1">
+        <div class="row mt-3 text-center">
+            <div class="col-lg-6">
+                <h2><b>Prenom : </b> {{ app.user.prenom }}</h2>
+            </div>
+            <div class="col-lg-6">
+                <h2><b>Nom : </b> {{ app.user.nom }}</h2>
+            </div>
+        </div>
+        <div class="row mt-3 text-center">
+            <div class="col-lg-4">
+                <h2><b>Adresse : </b> {{ app.user.adressePostale }}</h2>
+            </div>
+            <div class="col-lg-4">
+                <h2><b>Email : </b> {{ app.user.email }}</h2>
+            </div>
+            <div class="col-lg-4">
+                <h2><b>Né : </b> {{ app.user.dateNaissance|date('d-m-y') }}</h2>
+            </div>
+        </div>
+        <div class="row mt-3 text-center border-top border-dark">
+            <div class="row mt-3 mb-5 text-center">
+                <h2 class="col-lg text-primary">Emprunt en cours :</h2>
+            </div>
+
+                {% for livre in app.user.livre %}
+                    {% if livre.disponible == false %}
+                        {% if livre.confirme == false %}
+                            <h2>En attente de récuperation</h2>
+                        {% endif %}
+
+                        <div class="container user-card rounded mb-3">
+                            <div class="row text-center mb-3 border-bottom border-dark">
+                                <div class="col-lg-2">
+                                    <h2>Couverture</h2>
+                                </div>
+                                <div class="col-lg-2">
+                                    <h2>Titre</h2>
+                                </div>
+                                <div class="col-lg-2">
+                                    <h2>Auteur</h2>
+                                </div>
+                                <div class="col-lg-2">
+                                    <h2>Date d'emprunt</h2>
+                                </div>
+                                <div class="col-lg-2">
+                                    <h2>Date de retour</h2>
+                                </div>
+                                <div class="col-lg-2">
+                                    <h2>Retard</h2>
+                                </div>
+                            </div>
+                             <div class="row mb-3 text-center">
+                                <div class="col-lg-2">
+                                    <img src="{{ vich_uploader_asset(livre, 'imageFile') }}" alt="Image couverture du livre"
+                                        class="m-auto mt-2" style="height: 150px; width: 100px; box-shadow: 5px 5px 6px 2px rgba(0,0,0,0.5)">
+                                </div>
+                                <div class="col-lg-2 mt-5">
+                                    <h3><i>{{ livre.titre }}</i></h3>
+                                </div>
+                                <div class="col-lg-2 mt-5">
+                                    <h3><i>{{ livre.auteur }}</i></h3>
+                                </div>
+                                 <div class="col-lg-2 mt-5">
+                                    <h3><i>{{ livre.dateEmprunt|date('d-m-y') }}</i></h3>
+                                 </div>
+                                 <div class="col-lg-2 mt-5">
+                                    <h3><i>{{ livre.dateRetour|date('d-m-y') }}</i></h3>
+                                 </div>
+                                {% set diferrence = date(livre.dateEmprunt).diff(date(livre.dateRetour)) %}
+                                 {% set retard = diferrence.days %}
+                                 {% if retard > 21 %}
+                                     <div class="col-lg-2 mt-5">
+                                         <h2 class="text-danger">RETARD</h2>
+                                     </div>
+                                 {% endif %}
+
+                             </div>
+                        </div>
+                    {% else %}
+                        vous n'avez pas de livre
+                    {% endif %}
+                {% endfor %}
+        </div>
+    </div>
+
+
+
+{% endblock %}

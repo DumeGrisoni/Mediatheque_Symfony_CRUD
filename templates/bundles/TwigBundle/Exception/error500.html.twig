@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block title %} Médiathèque | Erreur Protocole {% endblock %}
+
+{% block body %}
+    <div class="container-md main-title w-50 mt-5" >
+        <div class="text-center row mb-5 ">
+            <div class="col mt-5">
+                <h1 style="font-family: var(--title-font); font-size: var(--title-size-big)"> Erreur lors du protocole</h1>
+            </div>
+        </div>
+        <div class="row text-center mt-5">
+            <div class="col mt-5">
+                <p style="font-size: var(--title-size-h1)">
+                    La page n'a pas pu se charger correctement. <br>
+                    Veuillez réessayer plus tard. <br>
+                    La Médiathèque.
+                </p>
+            </div>
+        </div>
+        <div class="row text-center mt-5">
+            <div class="col mt-5">
+                <button class="button rounded w-25">
+                    <a href="{{ path('Home') }}"><p style="font-size: var(--title-size-h2)">Retourner à l'acceuil</p></a>
+                </button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

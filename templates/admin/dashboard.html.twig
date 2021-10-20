@@ -1,0 +1,74 @@
+
+{% extends '@!EasyAdmin/layout.html.twig' %}
+
+{% block content %}
+    <div class=" container-md mt-5 border-dark border rounded text-center mb-5">
+            <h1 class="mx-auto mb-5">Votre Espace Administrateur</h1>
+
+        <div class="container-md">
+            <div class="row bottom-border text-center mb-5 " style="background-color: var(--secondary-color)">
+                <div class="col-sm-2 col-2 ">
+                    <h3 class="rowDash">Couverture</h3>
+                </div>
+                <div class="col-sm-2 col-2">
+                    <h3 class="rowDash mx-3">Titre</h3>
+                </div>
+                <div class="col-sm-2 col-2">
+                    <h3 class="rowDash">Auteur</h3>
+                </div>
+                <div class="col-sm-2 col-2">
+                    <h3 class="rowDash">Date d'emprunt</h3>
+                </div>
+                <div class="col-sm-2 col-2">
+                    <h3 class="rowDash mx-3">Date de retour</h3>
+                </div>
+                <div class="col-sm-2 col-2">
+                    <h3 class="rowDash">Statut</h3>
+                </div>
+            </div>
+            {% for livre in livres %}
+                {% if livre.disponible == false %}
+                    <div class="row mb-3 bottom-border" style="font-size: 1.5rem">
+                        <div class="col-2 col-lg- mb-3">
+                            <img src="{{ vich_uploader_asset(livre, 'imageFile') }}" alt="Image couverture du livre"
+                                 style=" box-shadow: 5px 5px 6px 2px rgba(0,0,0,0.5);"
+                                 class="border border-dark rounded image">
+                        </div>
+                        <div class="col-2 col-lg-2 mb-3 t">
+                            <p class="titre">{{ livre.titre }}</p>
+                        </div>
+                        <div class="col-2 col-lg-2 mb-3">
+                            <p>{{ livre.auteur }}</p>
+                        </div>
+                        <div class="col-2 col-lg-2 mb-3">
+                            <p  class="mx-2">{{ livre.dateEmprunt|date('d-m-y') }}</p>
+                        </div>
+                        <div class="col-2 col-lg-2 mb-3">
+                            <p>{{ livre.dateRetour|date('d-m-y') }}</p>
+                        </div>
+                        {% if livre.confirme == false %}
+                            <div class="col-2 col-lg-2 mb-3">
+                                <h2> En attente de confirmation</h2>
+                            </div>
+                            {% else %}
+                                {% set difference = date(livre.dateEmprunt).diff(date(livre.dateRetour)) %}
+                                {% set retard = difference.days %}
+                                {% if retard > 21 %}
+                                    <div class="col-2 col-lg-2 mb-3">
+                                        <h2>RETARD</h2>
+                                    </div>
+                                    {% else %}
+                                        <div class="col-2 col-lg-2 mb-3">
+                                            <h2> Confirmé </h2>
+                                        </div>
+                                {% endif %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+{% endblock %}

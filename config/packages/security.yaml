@@ -1,0 +1,67 @@
+security:
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_EMPLOYE
+        ROLE_EMPLOYE:  ROLE_INSCRIT
+
+    # https://symfony.com/doc/current/security/authenticator_manager.html
+    enable_authenticator_manager: true
+    # https://symfony.com/doc/current/security.html#c-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        App\Entity\Inscrit:
+            algorithm: auto
+        App\Entity\Employe:
+            algorithm: auto
+        App\Entity\Administrateur:
+            algorithm: auto
+
+
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_admin_provider:
+            entity:
+                class: App\Entity\Administrateur
+                property: email
+        app_employe_provider:
+            entity:
+                class: App\Entity\Employe
+                property: email
+        app_inscrit_provider:
+            entity:
+                class: App\Entity\Inscrit
+                property: email
+        app_users:
+            chain:
+                providers: [ 'app_admin_provider', 'app_employe_provider', 'app_inscrit_provider' ]
+
+        # used to reload user from session & other features (e.g. switch_user)
+        # used to reload user from session & other features (e.g. switch_user)
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: true
+            provider: app_users
+            custom_authenticator:
+                - App\Security\AdministrateurAuthenticator
+
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+         - { path: ^/admin, roles: [ROLE_EMPLOYE , ROLE_ADMIN] }
+         - { path: ^/catalogue, roles: ROLE_INSCRIT }
+

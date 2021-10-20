@@ -1,0 +1,7 @@
+#Allow
+!public/bundles
+!public/bundles/easyadmin
+
+#Disallow
+.env
+vendor

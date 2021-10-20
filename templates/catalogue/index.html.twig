@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catalogue | Médiathèque{% endblock %}
+
+{% block body %}
+    {% include 'Navbar.html.twig' %}
+
+
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="row">
+            <div class="col">
+                <button class="btn" style="background-color: lightcoral">{{ flashMessage }}</button>
+            </div>
+        </div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="row ">
+            <div class="col">
+                <button class="btn" style="background-color: var(--tercary-color)">{{ flashMessage }}</button>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="container-md text-center h-auto mt-5 mb-3 main-title rounded border border-dark">
+        <h1>Notre Catalogue de livres</h1>
+    </div>
+    <div class="container-md text-center h-auto mt-5 mb-3 main-title rounded border border-dark" id="msgCatalogue">
+        <h3>Afin d’emprunter un livre verifiez s'il est disponible grâce au bouton de couleur.<br>
+            Si le bouton est vert alors le livre est disponible.<br>
+            Si le bouton est de couleur rouge le livre est déjà en cours d’emprunt<br>
+            Cliquez sur voir plus de détails...</h3>
+    </div>
+
+    <div class="container-md">
+        {{ form(form) }}
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+             {% for livre in livres %}
+                 <div class=" col-lg-3 col-sm-6">
+                     <div class="card rounded mt-3 mx-auto border border-dark" style="width: 20rem; height: 30rem; box-shadow: 5px 5px 6px 2px rgba(0,0,0,0.5);">
+                        <img src="{{ vich_uploader_asset(livre, 'imageFile') }}" alt="Image couverture du livre"
+                          class="m-auto mt-2" style="height: 150px; width: 150px">
+                         <div class="card-body ">
+                             <h3 class="card-title m-auto">{{ livre.titre }}</h3>
+                             <p class="card-subtitle mt-2"><b>Paru le :</b> {{ livre.dateparution|date('d-m-y') }}</p>
+                             <p class="card-text"><b>Par : </b> {{ livre.auteur }}</p>
+                             <p class="card-text"><b>Genre : </b> {{ livre.genre }}</p>
+                         </div>
+                         <div class="container mb-3">
+                             <div class="row justify-content-center">
+                                 <div class="col-md-8 text-center">
+                                     <button class="btn btn-primary button" style="color: var(--gray)">
+                                         <a href="{{ path('livre', {id: livre.id}) }}">
+                                             Voir...
+                                         </a>
+                                     </button>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="container-fluid ">
+                         <p class="d-inline px-5"><b>Disponibilité : </b>
+                             {% if livre.disponible  == 'true' %}
+                                 <span class="bi bi-check-circle-fill px-5" style="font-size: 35px; color: green"></span>
+                             {% else %}
+                                 <span class="bi bi-dash-circle-fill px-5" style="font-size: 35px; color: red"></span>
+                             {% endif %}
+                         </p>
+                     </div>
+                 </div>
+             {% endfor %}
+        </div>
+</div>
+    <ul class="pagination container">
+        {% for item in 1..((total / limit)|round(0, 'ceil')) %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ item }}">{{ item }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+
+
+{% endblock %}

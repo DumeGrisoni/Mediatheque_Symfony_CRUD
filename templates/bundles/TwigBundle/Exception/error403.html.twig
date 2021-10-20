@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block title %} Médiathèque | Accès refusé {% endblock %}
+
+{% block body %}
+    <div class="container-md main-title w-50 mt-5" >
+        <div class="text-center row mb-5 ">
+            <div class="col mt-5">
+                <h1 style="font-family: var(--title-font); font-size: var(--title-size-big)"> Accès refusé</h1>
+            </div>
+        </div>
+        <div class="row text-center mt-5">
+            <div class="col mt-5">
+                <p style="font-size: var(--title-size-h1)">
+                    Vous n'avez pas encore l'authorisation d'accéder à cette page. <br>
+                    Veuillez réessayer plus tard. <br>
+                    La Médiathèque.
+                </p>
+            </div>
+        </div>
+        <div class="row text-center mt-5">
+            <div class="col mt-5">
+                <button class="button rounded w-25">
+                    <a href="{{ path('app_login') }}"><p style="font-size: var(--title-size-h2)">Retourner à la connexion</p></a>
+                </button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

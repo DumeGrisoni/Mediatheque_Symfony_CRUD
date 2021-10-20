@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    {% include 'Navbar.html.twig' %}
+<form method="post" class="w-50 container-md mt-5 ">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3 container-md main-title rounded border border-dark">
+            <div class="row mx-auto ">
+                <div class="col-lg text-center">
+                    <h2>Vous êtes connecté en tant que {{ app.user.username }},
+                        <a class="lien" href="{{ path('app_logout') }}">Déconnexion</a>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="container-md text-center main-title h-auto rounded border border-dark">
+        <div class="row">
+            <div class="col-lg">
+                <h1 class=" mb-3 font-weight-normal" style="font-family: var(--title-font)">Connectez-vous</h1>
+            </div>
+        </div>
+        <div class="row mx-auto">
+            <div class="col">
+                <label for="inputEmail" style="font-size: 2.5rem">
+                   <span style="font-size: var(--title-size-h2)">Email</span>
+                </label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+            </div>
+        </div>
+        <div class="row  mx-auto">
+            <div class="col">
+                <label for="inputPassword" style="font-size: 2.5rem">
+                   <span style="font-size: var(--title-size-h2)">Mot de passe</span>
+                </label>
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}">
+
+                {#
+                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                See https://symfony.com/doc/current/security/remember_me.html
+
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> Remember me
+                    </label>
+                </div>
+                #}
+            </div>
+        </div>
+        <div class="row w-50 mx-auto">
+            <div class="col-lg-6  text-center ">
+                <button class="button rounded" type="submit" style="background-color: lightblue; font-size: var(--title-size-h2)">
+                    Se connecter
+                </button>
+            </div>
+            <div class="col-lg-6 text-center ">
+                <button class="button  rounded " type="submit" style="font-size: var(--title-size-h2)">
+                    <a href="{{ path('register') }}">
+                       S'inscrire
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</form>
+{% endblock %}

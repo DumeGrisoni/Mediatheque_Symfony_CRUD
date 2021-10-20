@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La médiathèque | Inscriptions{% endblock %}
+
+{% block body %}
+    {% include 'Navbar.html.twig' %}
+    <div class="container-md">
+        <div class="row">
+            <div class=" col-lg-6 text-center mx-auto main-title mt-5 rounded border border-dark h-25 mb-5" id="message">
+                <p style="font-size: var(--title-size-h2); font-family: var(--title-H)">Toutes inscriptions devront être validées par un employé de la Médiathèque après vérification des données que vous avez fournies.  </p>
+            </div>
+            <div class="col-lg-6 text-center mx-auto main-title mt-5 rounded border border-dark h-25 mb-5" id="message">
+                <p style="font-size: var(--title-size-h2); font-family: var(--title-H)">Le mot de passe doit contenir au moins 1 majuscule, 1 miniscule, 1 caractère spécial et 1 chiffre.</p>
+            </div>
+        </div>
+        <div class="row text-center mx-auto main-title mt-5 rounded border border-dark h-25 mb-5" id="Form">
+            <div class="row text-center">
+                <h1 class="col" style="font-family: var(--title-font)">Inscriptions</h1>
+            </div>
+                {{ form_start(registrationForm) }}
+            <div class="row mt-5 text-center">
+                <div class="col-lg-6">
+                    <h3>{{ form_row(registrationForm.prenom) }}</h3>
+                </div>
+                <div class="col-lg-6">
+                    <h3>{{ form_row(registrationForm.nom) }}</h3>
+                </div>
+            </div>
+            <div class="row mt-5 text-center">
+                <div class="col-lg-6">
+                    <h3>{{ form_row(registrationForm.email) }}</h3>
+                </div>
+                <div class="col-lg-6">
+                    <h3>{{  form_row(registrationForm.plainPassword, {
+                            label: 'Mot de Passe'
+                        }) }}
+                    </h3>
+                </div>
+            </div>
+            <div class="row mt-5 text-center">
+                <div class="col-lg-6">
+                    <h3>{{ form_row(registrationForm.date_naissance) }}</h3>
+                </div>
+                <div class="col-lg-6">
+                    <h3>{{ form_row(registrationForm.adresse_postale) }}</h3>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col"><button type="submit" class="btn button w-50">S'inscrire</button></div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(registrationForm) }}
+{% endblock %}

@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Sue+Ellen+Francisco&display=swap');
+@import url(https://fr.allfont.net/allfont.css?fonts=noto-sans);
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+
+
+:root {
+    --font-color : #000000 ;
+    --gray: #41444B;
+    --secondary-color: #E3E0CF;
+    --tercary-color: #C5D5CB;
+
+    --title-font: 'Sue Ellen Francisco';
+    --title-H : 'Noto Sans', arial;
+
+    --title-size-big : 70px;
+    --title-size-h1 : 36px;
+    --title-size-h2: 24px;
+
+}
+.bouton{
+    background-color: red;
+}
+body{
+    background: rgb(227,224,207);
+    background: linear-gradient(90deg, rgba(227,224,207,1) 50%, rgba(255,255,255,1) 100%);
+}
+a{
+    font-family: var(--title-font);
+    font-size: 20px;
+}
+
+span{
+    font-family: var(--title-H);
+    font-size: 18px;
+}
+.btn{
+    font-size: var(--title-size-h2);
+    background-color: var(--tercary-color);
+    border: var(--gray) 1px solid;
+    transform: scale(1);
+    transition: linear 0.2s;
+}
+.page-link{
+    font-size: 18px;
+}
+.btn:hover{
+    transform: scale(1.1);
+    transition: linear 0.2s;
+}
+
+.main-title{
+    font-family: var(--title-font);
+    font-size: var(--title-size-big);
+    background: var(--secondary-color);
+    height: 70vh;
+    box-shadow: 5px 5px 6px 2px rgba(0,0,0,0.5);
+}
+h1{
+    font-family: var(--title-font);
+    font-size: var(--title-size-h1);
+}
+h2 {
+    font-size: var(--title-size-h2);
+    font-family: var(--title-font);
+    color: red;
+}
+h3{
+    font-family: var(--title-font);
+    font-size: var(--title-size-h2);
+}
+p{
+    font-family: var(--title-H);
+    font-size: 18px;
+}
+img{
+    width: 5rem;
+}
+.content-header{
+    background-color: transparent;
+}
+.sidebar{
+    background: var(--tercary-color);
+    box-shadow: 5px 5px 6px 2px rgba(0,0,0,0.5);
+    border-radius: 5px;
+}
+.content-top{
+    border-bottom : var(--gray) 1px solid
+}
+.alert-notice{
+    margin: auto;
+    background: var(--tercary-color);
+    font-family: var(--title-H);
+    font-size: 20px;
+    width: 50%;
+    text-align: center;
+    border-radius: 5px;
+    border: var(--gray) 1px solid;
+}
+.alert-error{
+    margin: auto;
+    background-color: lightcoral;
+    font-family: var(--title-H);
+    font-size: 20px;
+    width: 50%;
+    text-align: center;
+    border-radius: 5px;
+    border: var(--gray) 1px solid;
+}
+
+
+@media only screen and (max-width: 600px) {
+
+    .livre {
+        width: 70%;
+    }
+    p{
+        font-size: 10px;
+    }
+    .image {
+        width: 2rem;
+    }
+    .rowDash{
+        font-size: 18px;
+    }
+    h2{
+        font-size: 12px;
+    }
+    .responsive-header{
+        background: var(--tercary-color);
+    }
+
+}

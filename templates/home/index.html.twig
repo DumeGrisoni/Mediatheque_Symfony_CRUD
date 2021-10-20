@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+	<div class="container-md mt-5">
+		<div class="d-flex align-items-center p-5 justify-content-center rounded main-title">
+			<div class="accueil">
+				<h2 style="font-size: var(--title-size-h1);">Bienvenue sur le site de médiathèque de la Chappel-Curreaux</h2>
+			</div>
+		</div>
+		<div class="container-md text-center mt-5">
+			<h2 class="liens">
+				<a href="{{ path('catalogue') }}" class="text-decoration-none liens-color">Voir notre catalogue</a>
+			</h2>
+		</div>
+	</div>
+{% endblock %}
